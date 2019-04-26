@@ -1,0 +1,49 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<div class="container">
+	
+	 <form id="formLoginData" action="" method="post">
+	 	<input type="hidden" name="enviar" value="1">
+		<div id="msjResponse"><?php echo $this->error_msj; ?></div>
+	  <div class="form-group">
+	    <label for="email">Email:</label>
+	    <input type="text" class="form-control" name="email" id="email" required="true">
+	  </div>
+	  <div class="form-group">
+	    <label for="pwd">Contraseña:</label>
+	    <input type="password" class="form-control" name="pwd" id="pwd"  required="true">
+	  </div>
+	  <button type="button" onclick="validarLogin()" class="btn btn-info">Acceder</button>
+	
+	</form> 
+
+
+	<script type="text/javascript">
+		
+		function validarLogin(){
+			
+			var dato1 =	$("#email").val();
+			var dato2 =	$("#pwd").val();
+
+			if(dato1 == ""){
+				$("#msjResponse").html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ingresa un email</div>');
+				//alert("Ingresa un email");
+				return false;
+			}	
+
+			if(dato2 == ""){
+				$("#msjResponse").html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ingresa una contraseña</div>');
+				//alert("Ingresa una contraseña");
+				return false;
+			}
+
+			$("#formLoginData").submit();
+
+			//$("#msjResponse").html('<div class="alert alert-success"><i class="fa fa-check" aria-hidden="true"></i> Login Correcto</div>');
+		}
+
+	</script>
