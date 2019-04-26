@@ -52,14 +52,19 @@ class View
 
             include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'header.phtml' ;
             
-            if(Session::get("auttenticacion")){
+            if(Session::get("autenticacion")){
                 include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'nav.phtml' ;
             }
             
             include_once  $rutaView;
-            if(Session::get("auttenticacion")){
+            
+
+            if(Session::get("autenticacion")){
             include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'footer.phtml' ;
             }
+
+
+
         } 
         else {
             throw new Exception('No se encuentra la Vista');

@@ -11,8 +11,9 @@ class loginController extends Controller{
 
 	function index(){
 
-		if(Session::get("auttenticacion")){
-			$this->redireccionar();
+		if(Session::get("autenticacion")){
+			$this->redireccionar("index");
+			exit;
 		}
 
 		$this->_view->error_msj = "";
@@ -34,14 +35,17 @@ class loginController extends Controller{
 				exit;
 		    }
 
+		    //*** El usuario es valido ... ***/
 
-		    Session::set("auttenticacion",true);
+		    Session::set("autenticacion",true);
 		    Session::set("idusuario", $resultado['idusuario']);
 		    Session::set("nombres", $resultado['nombres']);
 		    Session::set("apellidos", $resultado['apellidos']);
+		    Session::set("foto", $resultado['foto']);
 
 
-		    $this->_view->error_msj = '<div class="alert alert-success">Bienvenido ' . $resultado['nombres'] . "  " .    $resultado['apellidos'] . '</div>';
+		    $this->redireccionar("index");exit;
+		    //$this->_view->error_msj = '<div class="alert alert-success">Bienvenido ' . $resultado['nombres'] . "  " .    $resultado['apellidos'] . '</div>';
 
 
 

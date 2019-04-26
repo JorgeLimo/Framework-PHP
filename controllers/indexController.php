@@ -12,17 +12,21 @@ class indexController extends Controller{
     }
 
 	function index(){
+
+		if(!Session::get("autenticacion")){
+			$this->redireccionar("login");exit;
+		}
+
         $resultado = $this->_index->obtenerUsuarios();
 		$this->_view->usuarios = $resultado;
 		$this->_view->titulo = "Precios...";
-		$this->_view->renderizar("index");
+		$this->_view->renderizar("index");exit;
 	}
 
 
 	function ionicuser(){
         $resultado = $this->_index->obtenerUsuarios();
-		echo json_encode($resultado);
-
+		echo json_encode($resultado);exit;
 	}
 
 

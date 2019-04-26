@@ -8,8 +8,7 @@ class Session
 		session_start();
 	}
 
-
-	//Session::destroy();
+	//Session::destroy(); //DESTRUYE TODO
 	//Session::destroy("hola")
 	//Session::destroy(["hola", "hola2"])
 	public static function destroy($clave = false)
@@ -25,7 +24,6 @@ class Session
 				if (isset($_SESSION[$clave])) {
 					unset($_SESSION[$clave]);
 				}
-
 			}
 		}else{
 			session_destroy();
@@ -33,7 +31,7 @@ class Session
 	}
 
 	
-	///calve = nombre, valor = 123
+	///clave = nombre, valor = 123
 	//Session::set("hola",123)
 	public static function set($clave, $valor)
 	{
