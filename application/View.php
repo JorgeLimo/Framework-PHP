@@ -1,15 +1,29 @@
 <?php 
 
-class View
+//Importamos Smarty
+require_once ROOT . 'libs' . DS . 'smarty' . DS . 'libs' . DS . 'Smarty.class.php';
+
+//Heredamos todas las funcionalidades de Smarty con la palabra reservada EXTENDS y la Clase del archivo.
+class View extends Smarty
 {
     private $_controlador;
 	
     public function __construct(Request $peticion) {
+        //llamamos al constructor del smarty
+        parent::__construct();
   		$this->_controlador = $peticion->getControlador();
 	}
 
     public function renderizar($vista, $item = false)
     {
+
+
+        //Se declaran las variables globales que pide el smarty
+        $this->template_dir = ROOT . 'views' . DS . 'layout'. DS . DEFAULT_LAYOUT . DS;
+        $this->config_dir = ROOT . 'views' . DS . 'layout'. DS . DEFAULT_LAYOUT . DS . 'configs' . DS;
+        $this->cache_dir = ROOT . 'tmp' . DS . 'cache' . DS ;
+        $this->compile_dir = ROOT . 'tmp' . DS . 'template' . DS ;
+
 
         $menu = array(
             array(
@@ -45,30 +59,25 @@ class View
                 'app_company'=> APP_COMPANY
                 )
         );
+
+
         //views/index/index.phtml
-         $rutaView = ROOT . 'views' . DS .  $this->_controlador . DS . $vista . '.phtml';
+         $rutaView = ROOT . 'views' . DS .  $this->_controlador . DS . $vista . '.tpl';
         
         if(is_readable($rutaView)){
-
-            include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'header.phtml' ;
-            
-            if(Session::get("autenticacion")){
-                include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'nav.phtml' ;
-            }
-            
-            include_once  $rutaView;
-            
-
-            if(Session::get("autenticacion")){
-            include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'footer.phtml' ;
-            }
-
-
-
+            $this->assign('_contenido', $rutaView);
         } 
         else {
             throw new Exception('No se encuentra la Vista');
         }
+
+
+        //se envia las variables globales que teniamos
+        $this->assign('_layoutParams',$_params);
+        //se muestra la plantailla master
+        $this->display('template.tpl');
+
+        
 
     }
 

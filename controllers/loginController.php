@@ -16,7 +16,6 @@ class loginController extends Controller{
 			exit;
 		}
 
-		$this->_view->error_msj = "";
 
 		if($this->getInt("enviar") == 1){
 			
@@ -24,14 +23,16 @@ class loginController extends Controller{
 		    $resultado = $this->_login->loginUsuarios($this->getSql("email"),$this->getSql("pwd"));
 
 		    if(!$resultado){
-		    	$this->_view->error_msj = '<div class="alert alert-danger">No se encuentro el usuario : ' . $this->getSql("email") . '</div>';
+
+
+        		$this->_view->assign('_errormsj', '<div class="alert alert-danger">No se encuentro el usuario : ' . $this->getSql("email") . '</div>' );
 				$this->_view->renderizar("index");
 				exit;
 		    }
 
 		    if($resultado['estado'] == 0){
-		    	$this->_view->error_msj = '<div class="alert alert-danger">Por favor, revisar el email de activacion que se envio al correo : ' . $this->getSql("email") . '</div>';
-				$this->_view->renderizar("index");
+		    	$this->_view->assign("_errormsj", '<div class="alert alert-danger">Por favor, revisar el email de activacion que se envio al correo : ' . $this->getSql("email") . '</div>');
+		    	$this->_view->renderizar("index");
 				exit;
 		    }
 

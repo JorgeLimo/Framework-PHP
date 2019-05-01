@@ -18,8 +18,10 @@ class indexController extends Controller{
 		}
 
         $resultado = $this->_index->obtenerUsuarios();
-		$this->_view->usuarios = $resultado;
-		$this->_view->titulo = "Precios...";
+		//$this->_view->usuarios = $resultado;
+		//$this->_view->titulo = "Precios...";
+
+		$this->_view->assign("titulo","Precios...");
 		$this->_view->renderizar("index");exit;
 	}
 
