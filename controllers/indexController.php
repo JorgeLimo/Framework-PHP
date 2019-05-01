@@ -18,11 +18,36 @@ class indexController extends Controller{
 		}
 
         $resultado = $this->_index->obtenerUsuarios();
+        
 		//$this->_view->usuarios = $resultado;
 		//$this->_view->titulo = "Precios...";
 
+		$this->_view->assign("usuarios",$resultado);
 		$this->_view->assign("titulo","Precios...");
+
 		$this->_view->renderizar("index");exit;
+	}
+
+	function procesar(){
+
+		$result = $this->_index->actualizarUsuarios(
+												$this->getSql("idusuario"),
+												$this->getSql("nombre"),
+												$this->getSql("apellidos"),
+												$this->getSql("email"),
+												$this->getSql("estado")
+											);
+
+		if($result){
+			$response['estado'] = true;
+			$response['mensaje'] = "Registro actualizado correctamente.";
+		}else{
+			$response['estado'] = false;
+			$response['iduser'] = $result;
+			$response['mensaje'] = "Ocurio un error, intentelo nuevamente.";
+		}
+
+		echo json_encode($response);exit;
 	}
 
 

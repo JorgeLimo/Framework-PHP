@@ -31,6 +31,36 @@ class indexModel extends Model {
         return $result;
 	}
 
+	function actualizarUsuarios($idusuario, $nombre, $apellidos, $email, $estado){
+
+       $result =  $this->_db->prepare("UPDATE usuarios SET nombres=:nombre, apellidos=:apellidos, email=:email, estado=:estado WHERE idusuario=:idusuario")
+            ->execute(
+                array(
+                    ':nombre' => $nombre,
+                    ':apellidos' => $apellidos,
+                    ':email' => $email,
+                    ':estado' => $estado,
+                    ':idusuario' => $idusuario
+                ));
+        return $result;
+
+	}
+
+  public function insertarUsuario($descripcion,$foto,$orden,$publicado,$estado){
+
+        $this->_db->prepare("INSERT INTO banners (`descripcion`, `foto`, `orden`, `publicado`, `estado`) VALUES (:descripcion,:foto,:orden,:publicado,:estado)")
+            ->execute(
+                array(
+                    ':descripcion' => $descripcion,
+                    ':foto' => BASE_URL ."public/banners/".$foto,
+                    ':orden' => $orden,
+                    ':publicado' => $publicado,
+                    ':estado' => $estado
+                ));
+
+        return $this->_db->lastInsertId();
+  }
+
 
 }
 

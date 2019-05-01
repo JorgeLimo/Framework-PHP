@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-01 02:55:10
+/* Smarty version 3.1.33, created on 2019-05-01 04:15:33
   from 'C:\xampp\htdocs\Framework-PHP\views\layout\default\template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cc8ee6e643be1_45058242',
+  'unifunc' => 'content_5cc90145941760_59398812',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac5717a215f718d3f944bdc0d82b0d620f5f6316' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Framework-PHP\\views\\layout\\default\\template.tpl',
-      1 => 1556672102,
+      1 => 1556676828,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cc8ee6e643be1_45058242 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cc90145941760_59398812 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="ES">
 <head>
@@ -29,7 +29,8 @@ function content_5cc8ee6e643be1_45058242 (Smarty_Internal_Template $_smarty_tpl)
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin 2 - Blank</title>
+  <title><?php echo (($tmp = @$_smarty_tpl->tpl_vars['titulo']->value)===null||$tmp==='' ? "Framework MVC | Bienvenido" : $tmp);?>
+</title>
   <link href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['ruta_vendor'];?>
 fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -41,11 +42,7 @@ jquery/jquery.min.js"><?php echo '</script'; ?>
 >
 </head>
 <body id="page-top">
-
-
   <?php if (Session::get("autenticacion")) {?>
-
-
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -358,7 +355,9 @@ productos/proveedores">Proveedores</a>
         </nav>
         <!-- End of Topbar -->
 
-        <?php }?>
+        <?php }?> 
+
+        
 
       <?php $_smarty_tpl->_subTemplateRender($_smarty_tpl->tpl_vars['_contenido']->value, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, true);
 ?>

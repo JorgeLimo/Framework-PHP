@@ -20,6 +20,7 @@ class View extends Smarty
 
         //Se declaran las variables globales que pide el smarty
         $this->template_dir = ROOT . 'views' . DS . 'layout'. DS . DEFAULT_LAYOUT . DS;
+        //crear la carpeta configs dentro de tu layout
         $this->config_dir = ROOT . 'views' . DS . 'layout'. DS . DEFAULT_LAYOUT . DS . 'configs' . DS;
         $this->cache_dir = ROOT . 'tmp' . DS . 'cache' . DS ;
         $this->compile_dir = ROOT . 'tmp' . DS . 'template' . DS ;
@@ -43,7 +44,7 @@ class View extends Smarty
                 )
         );
 
-
+        
         $_params = array(
             'ruta_css' => BASE_URL . 'views/layout/' . DEFAULT_LAYOUT . '/css/',
             'ruta_img' => BASE_URL . 'views/layout/' . DEFAULT_LAYOUT . '/img/',
@@ -65,6 +66,24 @@ class View extends Smarty
          $rutaView = ROOT . 'views' . DS .  $this->_controlador . DS . $vista . '.tpl';
         
         if(is_readable($rutaView)){
+
+            //se comenta la forma antigua
+
+            /**
+            include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'header.phtml' ;
+            
+            if(Session::get("autenticacion")){
+                include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'nav.phtml' ;
+            }
+            
+            include_once  $rutaView;
+            
+
+            if(Session::get("autenticacion")){
+            include_once  ROOT . 'views' . DS . 'layout' . DS . DEFAULT_LAYOUT . DS . 'footer.phtml' ;
+            }
+             **/
+
             $this->assign('_contenido', $rutaView);
         } 
         else {
