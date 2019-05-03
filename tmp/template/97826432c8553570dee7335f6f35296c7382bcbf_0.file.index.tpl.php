@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-01 05:13:43
+/* Smarty version 3.1.33, created on 2019-05-03 04:23:11
   from 'C:\xampp\htdocs\Framework-PHP\views\index\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cc90ee7234246_61750492',
+  'unifunc' => 'content_5ccba60f4b25f0_42622666',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '97826432c8553570dee7335f6f35296c7382bcbf' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Framework-PHP\\views\\index\\index.tpl',
-      1 => 1556680421,
+      1 => 1556850189,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,22 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cc90ee7234246_61750492 (Smarty_Internal_Template $_smarty_tpl) {
-?>   <div class="container-fluid">
+function content_5ccba60f4b25f0_42622666 (Smarty_Internal_Template $_smarty_tpl) {
+?>    <?php echo '<script'; ?>
+ type="text/javascript">
+      
+      var tablaActual = <?php echo json_encode($_smarty_tpl->tpl_vars['usuarios']->value);?>
+;
+      console.log(tablaActual);
+    
+
+
+    <?php echo '</script'; ?>
+>
+
+
+
+   <div class="container-fluid">
    <h1 class="h3 mb-4 text-gray-800"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['tituloPagina']->value)===null||$tmp==='' ? "Pagina administrable" : $tmp);?>
 </h1>
    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -45,23 +59,30 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['usuario']->value) {
 ?>
-        <tr>
-          <td><?php echo $_smarty_tpl->tpl_vars['usuario']->value['nombres'];?>
-</td>
-          <td><?php echo $_smarty_tpl->tpl_vars['usuario']->value['apellidos'];?>
-</td>
-          <td><?php echo $_smarty_tpl->tpl_vars['usuario']->value['email'];?>
-</td>
+        <tr data-user="<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+">
+          <td><span id="editarNombre<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+"><?php echo $_smarty_tpl->tpl_vars['usuario']->value['nombres'];?>
+</span></td>
+          <td><span id="editarApellido<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+"><?php echo $_smarty_tpl->tpl_vars['usuario']->value['apellidos'];?>
+</span></td>
+          <td><span id="editarEmail<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+"><?php echo $_smarty_tpl->tpl_vars['usuario']->value['email'];?>
+</span></td>
           <?php if ($_smarty_tpl->tpl_vars['usuario']->value['estado'] == 1) {?>
-          <td>Activado</td>
+          <td><span id="editarEstado<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+">Activado</span></td>
           <?php } else { ?>
-          <td>Borrado</td>
+          <td><span id="editarEstado<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+">Borrado</span></td>
           <?php }?>
           <td>
             <a class="btn btn-danger" href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
 index/eliminar/<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
 " >Eliminar</a>
-            <a class="btn btn-success" onclick="editarUsuario('<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+            <a id="btnCustomEdit<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
+" class="btn btn-success" onclick="editarUsuario('<?php echo $_smarty_tpl->tpl_vars['usuario']->value['idusuario'];?>
 ','<?php echo $_smarty_tpl->tpl_vars['usuario']->value['nombres'];?>
 ','<?php echo $_smarty_tpl->tpl_vars['usuario']->value['apellidos'];?>
 ','<?php echo $_smarty_tpl->tpl_vars['usuario']->value['email'];?>
@@ -134,10 +155,22 @@ index/procesar',
                       $("#msjResponse").html('<div class="alert alert-success">'+obj.mensaje+'</div>');
                       $("#exampleModal").scrollTop(0);
 
-                       setTimeout(function(){ 
+                      $("#editarNombre"+dat5).text(dat1);
+                      $("#editarApellido"+dat5).text(dat2);
+                      $("#editarEmail"+dat5).text(dat3);
+                      if(dat4 == 0){
+                        $("#editarEstado"+dat5).text("Borrado");
+                      }else{
+                        $("#editarEstado"+dat5).text("Activado");
+                      }
+
+
+                      $("#btnCustomEdit"+dat5).attr("onclick","editarUsuario('" + dat5 + "', '" + dat1 +"', '" + dat2 + "', '" + dat3 +"', '"+dat4+"')");
+
+                       /**setTimeout(function(){ 
                         window.location.href= "<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
 index/";
-                       }, 2000);
+                       }, 2000);**/
 
                       return false;
                     }else{

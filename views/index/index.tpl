@@ -1,3 +1,14 @@
+    <script type="text/javascript">
+      
+      var tablaActual = {json_encode($usuarios)};
+      console.log(tablaActual);
+    
+
+
+    </script>
+
+
+
    <div class="container-fluid">
    <h1 class="h3 mb-4 text-gray-800">{$tituloPagina|default:"Pagina administrable"}</h1>
    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -17,18 +28,18 @@
       </thead>
       <tbody>
         {foreach item=usuario from=$usuarios}
-        <tr>
-          <td>{$usuario.nombres}</td>
-          <td>{$usuario.apellidos}</td>
-          <td>{$usuario.email}</td>
+        <tr data-user="{$usuario.idusuario}">
+          <td><span id="editarNombre{$usuario.idusuario}">{$usuario.nombres}</span></td>
+          <td><span id="editarApellido{$usuario.idusuario}">{$usuario.apellidos}</span></td>
+          <td><span id="editarEmail{$usuario.idusuario}">{$usuario.email}</span></td>
           {if $usuario.estado == 1}
-          <td>Activado</td>
+          <td><span id="editarEstado{$usuario.idusuario}">Activado</span></td>
           {else}
-          <td>Borrado</td>
+          <td><span id="editarEstado{$usuario.idusuario}">Borrado</span></td>
           {/if}
           <td>
             <a class="btn btn-danger" href="{$_layoutParams.root}index/eliminar/{$usuario.idusuario}" >Eliminar</a>
-            <a class="btn btn-success" onclick="editarUsuario('{$usuario.idusuario}','{$usuario.nombres}','{$usuario.apellidos}','{$usuario.email}','{$usuario.estado}')" >Editar</a>
+            <a id="btnCustomEdit{$usuario.idusuario}" class="btn btn-success" onclick="editarUsuario('{$usuario.idusuario}','{$usuario.nombres}','{$usuario.apellidos}','{$usuario.email}','{$usuario.estado}')" >Editar</a>
           </td>
         </tr>
         {/foreach}
@@ -91,9 +102,21 @@
                       $("#msjResponse").html('<div class="alert alert-success">'+obj.mensaje+'</div>');
                       $("#exampleModal").scrollTop(0);
 
-                       setTimeout(function(){ 
+                      $("#editarNombre"+dat5).text(dat1);
+                      $("#editarApellido"+dat5).text(dat2);
+                      $("#editarEmail"+dat5).text(dat3);
+                      if(dat4 == 0){
+                        $("#editarEstado"+dat5).text("Borrado");
+                      }else{
+                        $("#editarEstado"+dat5).text("Activado");
+                      }
+
+
+                      $("#btnCustomEdit"+dat5).attr("onclick","editarUsuario('" + dat5 + "', '" + dat1 +"', '" + dat2 + "', '" + dat3 +"', '"+dat4+"')");
+
+                       /**setTimeout(function(){ 
                         window.location.href= "{$_layoutParams.root}index/";
-                       }, 2000);
+                       }, 2000);**/
 
                       return false;
                     }else{
