@@ -46,15 +46,16 @@ class indexModel extends Model {
 
 	}
 
-  public function insertarUsuario($descripcion,$foto,$orden,$publicado,$estado){
 
-        $this->_db->prepare("INSERT INTO banners (`descripcion`, `foto`, `orden`, `publicado`, `estado`) VALUES (:descripcion,:foto,:orden,:publicado,:estado)")
+
+  public function agregarUsuarios($nombres,$apellidos,$email,$estado){
+
+        $this->_db->prepare("INSERT INTO usuarios (`nombres`, `apellidos`, `email`, `estado`) VALUES (:nombres,:apellidos,:email,:estado)")
             ->execute(
                 array(
-                    ':descripcion' => $descripcion,
-                    ':foto' => BASE_URL ."public/banners/".$foto,
-                    ':orden' => $orden,
-                    ':publicado' => $publicado,
+                    ':nombres' => $nombres,
+                    ':apellidos' => $apellidos,
+                    ':email' => $email,
                     ':estado' => $estado
                 ));
 

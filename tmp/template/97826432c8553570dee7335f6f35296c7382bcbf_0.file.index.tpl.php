@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-03 04:23:11
+/* Smarty version 3.1.33, created on 2019-05-03 05:04:54
   from 'C:\xampp\htdocs\Framework-PHP\views\index\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ccba60f4b25f0_42622666',
+  'unifunc' => 'content_5ccbafd6eaf165_36963773',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '97826432c8553570dee7335f6f35296c7382bcbf' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Framework-PHP\\views\\index\\index.tpl',
-      1 => 1556850189,
+      1 => 1556852693,
       2 => 'file',
     ),
   ),
@@ -20,16 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ccba60f4b25f0_42622666 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ccbafd6eaf165_36963773 (Smarty_Internal_Template $_smarty_tpl) {
 ?>    <?php echo '<script'; ?>
  type="text/javascript">
       
       var tablaActual = <?php echo json_encode($_smarty_tpl->tpl_vars['usuarios']->value);?>
 ;
-      console.log(tablaActual);
-    
-
-
+  
     <?php echo '</script'; ?>
 >
 
@@ -41,6 +38,8 @@ function content_5ccba60f4b25f0_42622666 (Smarty_Internal_Template $_smarty_tpl)
    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
       </div>
+
+      <button style="float:right;margin-bottom: 50px;"  data-toggle="modal" data-target="#agregarUsuarioModal" class="btn btn-primary">Agregar Usuario</button>
       <div class="container">
     <?php if (isset($_smarty_tpl->tpl_vars['usuarios']->value)) {?>
     <table class="table">
@@ -101,8 +100,58 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php }?>
     </div>
 
+<br>
+
+<br>
+
+<hr>
+
+<br>
+
+<br>
+
+  <div class="container">
+    
+
+
+        <table class="table">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Estado</th>
+          <th>acccion</th>
+        </tr>
+      </thead>
+      <tbody id="loadBodyTable"></tbody>
+     </table>
+
+
+  </div>
+
+
     <?php echo '<script'; ?>
  type="text/javascript">
+
+      $( document ).ready(function() {
+          
+
+          var trString = "";
+
+          for (var i = 0; i < tablaActual.length; i++) {
+
+            var trInternal = "<tr data-userInfo='"+tablaActual[i].idusuario+"' ><td>"+tablaActual[i].nombres+"</td><td>"+tablaActual[i].apellidos+"</td><td>"+tablaActual[i].email+"</td><td>"+tablaActual[i].estado+"</td><td><button class='btn btn-success'>Editar</button></td></tr>";
+
+            
+            trString +=  trInternal;
+          }
+
+          $("#loadBodyTable").html(trString);
+
+
+      });
+
       
       function editarUsuario(idusuario, nombres,apellidos, email, estado){
 
@@ -115,6 +164,57 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
         $("#exampleModal").modal("show");
       }
+
+
+      function procesarDataGuardar(){
+
+
+         var dat1 =  $("#nombresData2").val();
+         var dat2 =  $("#apellidosData2").val();
+         var dat3 =  $("#correoData2").val();
+         var dat4 =  $("#estadoData2").val();
+
+         if(dat1 == "" ||dat2 == "" ||dat3 == "" ||dat4 == ""){
+            $("#msjResponse2").html('<div class="alert alert-danger">Ingrese todos los campos</div>');
+            $("#agregarUsuarioModal").scrollTop(0);
+            return false;
+         }
+
+        var formdata = new FormData();
+        formdata.append("nombre", dat1);// <input  type= "text" name="nombre" value="jorge" />
+        formdata.append("apellidos", dat2);
+        formdata.append("email", dat3);
+        formdata.append("estado", dat4);
+
+              $.ajax({
+                  url: '<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
+index/agregarUsuario',
+                  type: "POST",
+                  data: formdata,
+                  processData: false,
+                  contentType: false,
+                  success: function (response) {
+                    console.log(response);
+                    var obj = JSON.parse(response.trim());
+
+                    if(obj.estado){
+                        $("#msjResponse2").html('<div class="alert alert-success">'+obj.mensaje+'</div>');
+            $("#agregarUsuarioModal").scrollTop(0);
+                          $("#agregarUsuarioModal").modal("hide");
+
+                    }else{
+                        $("#msjResponse2").html('<div class="alert alert-danger">'+obj.mensaje+'</div>');
+            $("#agregarUsuarioModal").scrollTop(0);
+                    }
+              
+                  },error: function (xhr, ajaxOptions, thrownError) {
+
+                  }
+            });
+
+
+      }
+
 
       function procesarData(){
 
@@ -189,6 +289,53 @@ index/";
 
     <?php echo '</script'; ?>
 >
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="agregarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="msjResponse2"></div>
+            <div class="form-group">
+              <label for="nombresData2">Nombres</label>
+              <input type="text" class="form-control" id="nombresData2" name="nombresData2" placeholder="Ingrese su(s) nombre(s)">
+            </div>
+
+              <div class="form-group">
+              <label for="apellidosData2">Apellidos</label>
+              <input type="text" class="form-control" id="apellidosData2"  name="apellidosData2"  placeholder="Ingrese sus apellidos">
+            </div>
+
+              <div class="form-group">
+              <label for="correoData2">Correo</label>
+              <input type="text" class="form-control" id="correoData2"  name="correoData2"  placeholder="Ingrese un email">
+            </div>
+           
+              <div class="form-group">
+              <label for="estadoData2">Estado</label>
+              <select class="form-control" id="estadoData2" name="estadoData2">
+                <option value="1">Si</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" onclick="procesarDataGuardar()" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
 
     <!-- Modal -->

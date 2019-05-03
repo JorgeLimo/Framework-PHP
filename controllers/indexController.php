@@ -28,6 +28,28 @@ class indexController extends Controller{
 		$this->_view->renderizar("index");exit;
 	}
 
+	function agregarUsuario(){
+
+		$result = $this->_index->agregarUsuarios(
+												$this->getSql("nombre"),
+												$this->getSql("apellidos"),
+												$this->getSql("email"),
+												$this->getSql("estado")
+											);
+
+		if($result){
+			$response['estado'] = true;
+			$response['iduser'] = $result;
+			$response['mensaje'] = "Registro actualizado correctamente.";
+		}else{
+			$response['estado'] = false;
+			$response['mensaje'] = "Ocurio un error, intentelo nuevamente.";
+		}
+
+		echo json_encode($response);exit;
+
+	}
+
 	function procesar(){
 
 		$result = $this->_index->actualizarUsuarios(
