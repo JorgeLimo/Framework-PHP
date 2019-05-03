@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-01 04:15:33
+/* Smarty version 3.1.33, created on 2019-05-03 02:33:39
   from 'C:\xampp\htdocs\Framework-PHP\views\layout\default\template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cc90145941760_59398812',
+  'unifunc' => 'content_5ccb8c63a42ef9_11189696',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac5717a215f718d3f944bdc0d82b0d620f5f6316' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Framework-PHP\\views\\layout\\default\\template.tpl',
-      1 => 1556676828,
+      1 => 1556843617,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cc90145941760_59398812 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ccb8c63a42ef9_11189696 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="ES">
 <head>
@@ -85,7 +85,7 @@ jquery/jquery.min.js"><?php echo '</script'; ?>
             <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
 usuarios">Mostrar</a>
             <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['root'];?>
-usuarios/agregar">Agregar</a>
+usuarios/subirarchivo">Carga Masiva</a>
           </div>
         </div>
       </li>

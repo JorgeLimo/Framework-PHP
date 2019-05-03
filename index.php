@@ -13,6 +13,10 @@ try{
 	require_once APP_PATH . 'Model.php';
 	require_once APP_PATH . 'Controller.php';
 	require_once APP_PATH . 'Session.php';
+
+	//$tiempo = time();
+	//echo $tiempo;exit;
+
 	Session::init();
 	Bootstrap::run(new Request());
 }catch(Exception $e){

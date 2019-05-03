@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-01 02:57:45
+/* Smarty version 3.1.33, created on 2019-05-03 02:31:28
   from 'C:\xampp\htdocs\Framework-PHP\views\login\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cc8ef092dc4e0_26751426',
+  'unifunc' => 'content_5ccb8be07dbd98_12391273',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '50ee4857f11c3027bd538dfceb499a2cc970be6b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Framework-PHP\\views\\login\\index.tpl',
-      1 => 1556672256,
+      1 => 1556672700,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cc8ef092dc4e0_26751426 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ccb8be07dbd98_12391273 (Smarty_Internal_Template $_smarty_tpl) {
 ?><style type="text/css">
 	body{
 	  background-color: #4e73df;
@@ -36,7 +36,6 @@ function content_5cc8ef092dc4e0_26751426 (Smarty_Internal_Template $_smarty_tpl)
     <div class="row justify-content-center">
 
       <div class="col-xl-10 col-lg-12 col-md-9">
-
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->

@@ -53,7 +53,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{$_layoutParams.root}usuarios">Mostrar</a>
-            <a class="collapse-item" href="{$_layoutParams.root}usuarios/agregar">Agregar</a>
+            <a class="collapse-item" href="{$_layoutParams.root}usuarios/subirarchivo">Carga Masiva</a>
           </div>
         </div>
       </li>
