@@ -9,11 +9,15 @@ class loginController extends Controller{
         $this->_login = $this->loadModel('login');
     }
 
-	function index(){
+	function index($activar = false){
 
 		if(Session::get("autenticacion")){
 			$this->redireccionar("index");
 			exit;
+		}
+
+		if($activar){
+			$this->_view->assign('_errormsj', '<div class="alert alert-success">Tu cuenta se activo correctamente</div>' );
 		}
 
 

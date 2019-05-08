@@ -62,7 +62,7 @@ class indexController extends Controller{
 
 		if($result){
 			$response['estado'] = true;
-			$response['mensaje'] = "Registro actualizado correctamente.";
+			$response['mensaje'] = "Registro actualizado completamente.";
 		}else{
 			$response['estado'] = false;
 			$response['iduser'] = $result;

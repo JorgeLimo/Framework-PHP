@@ -103,6 +103,7 @@
       
       function editarUsuario(idusuario, nombres,apellidos, email, estado){
 
+          //JQUERY
           $("#nombresData").val(nombres);
           $("#apellidosData").val(apellidos);
           $("#correoData").val(email);
@@ -110,7 +111,7 @@
           $("#idusuarioData").val(idusuario);
 
 
-        $("#exampleModal").modal("show");
+          $("#exampleModal").modal("show");
       }
 
 
@@ -171,8 +172,6 @@
          var dat4 =  $("#estadoData").val();
          var dat5 =  $("#idusuarioData").val();
 
-
-
          if(dat1 == "" ||dat2 == "" ||dat3 == "" ||dat4 == ""){
             $("#msjResponse").html('<div class="alert alert-danger">Ingrese todos los campos</div>');
             $("#exampleModal").scrollTop(0);
@@ -181,11 +180,15 @@
 
 
         var formdata = new FormData();
+
         formdata.append("nombre", dat1);// <input  type= "text" name="nombre" value="jorge" />
         formdata.append("apellidos", dat2);
         formdata.append("email", dat3);
         formdata.append("estado", dat4);
         formdata.append("idusuario", dat5);
+
+        //var=1&var2=2%hola=comoestas
+
 
             $.ajax({
                   url: '{$_layoutParams.root}index/procesar',
@@ -196,7 +199,11 @@
                   success: function (response) {
                     console.log(response);
                     var obj = JSON.parse(response.trim());
-                    
+
+
+                    // {  estado = true/false , mensaje = "String", data : [] } 
+
+                    //      
                     if(obj.estado){
                       $("#msjResponse").html('<div class="alert alert-success">'+obj.mensaje+'</div>');
                       $("#exampleModal").scrollTop(0);
@@ -287,7 +294,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -299,17 +306,14 @@
               <label for="nombresData">Nombres</label>
               <input type="text" class="form-control" id="nombresData" name="nombresData" placeholder="Ingrese su(s) nombre(s)">
             </div>
-
               <div class="form-group">
               <label for="apellidosData">Apellidos</label>
               <input type="text" class="form-control" id="apellidosData"  name="apellidosData"  placeholder="Ingrese sus apellidos">
             </div>
-
               <div class="form-group">
               <label for="correoData">Correo</label>
               <input type="text" class="form-control" id="correoData"  name="correoData"  placeholder="Ingrese un email">
             </div>
-           
               <div class="form-group">
               <label for="estadoData">Estado</label>
               <select class="form-control" id="estadoData" name="estadoData">
