@@ -28,6 +28,64 @@ class usuariosController extends Controller{
 		$this->_view->renderizar("upload");exit;
 	}
 
+    function subirarchivoExcel(){
+
+        $this->_view->renderizar("excel");exit;
+    }
+
+    function subirData(){
+
+
+        $this->getLibrary('PHPExcel/PHPExcel/IOFactory');
+
+         $pathfile = $_FILES['excel']['name'];
+         $ext = pathinfo($pathfile,PATHINFO_EXTENSION);
+         $uploaDir = 'private/imports/';
+         $dataRamdon = rand(1,9);
+
+        $tmpFile = $_FILES['excel']['tmp_name'];
+        $tmp_name_now = time() . "-". $dataRamdon . '.'. $ext;
+        $filename= $uploaDir . $tmp_name_now;
+        move_uploaded_file($tmpFile, $filename);
+
+
+    $objPHPExcel = PHPEXCEL_IOFactory::load($filename);
+    
+    $objPHPExcel->setActiveSheetIndex(0);
+
+    $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+
+    $arrayData = array();
+
+      for($i = 2; $i <= $numRows; $i++){
+      
+
+        $dato1= $objPHPExcel->getActiveSheet()->getCell('A'.$i)->getValue();
+        $dato2= $objPHPExcel->getActiveSheet()->getCell('B'.$i)->getValue();
+        array_push($arrayData ,  $dato1);
+        array_push($arrayData ,  $dato2);
+
+      }
+      echo "<pre>";
+      print_r($arrayData);
+      exit;
+
+    }
+
+    function loginGoogle(){
+
+
+        $this->_view->renderizar("google");exit;
+
+    }
+
+    function loginFB(){
+
+
+        $this->_view->renderizar("facebook");exit;
+
+    }
+
 	function activar($hash = false, $idusuario = false){
 
         $resultado = $this->_usuarios->activarUsuario($hash, $idusuario);
@@ -39,6 +97,119 @@ class usuariosController extends Controller{
         }
 	}
 
+    function generarWord(){
+
+          header("Content-type: application/vnd.ms-word");
+          header("Content-Disposition: attachment;Filename=document_name.doc");    
+          echo "<html>";
+          echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
+          echo "<body>";
+          echo "<b>My first document</b>";
+          echo "</body>";
+          echo "</html>";
+          exit;
+
+    }
+
+    function generarWord2(){
+
+
+        $this->getLibrary('PHPWord-develop/bootstrap');
+
+        // Creating the new document...
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        /* Note: any element you append to a document must reside inside of a Section. */
+
+        // Adding an empty Section to the document...
+        $section = $phpWord->addSection();
+        // Adding Text element to the Section having font styled by default...
+        $section->addText(
+            '"Learn from yesterday, live for today, hope for tomorrow. '
+                . 'The important thing is not to stop questioning." '
+                . '(Albert Einstein)'
+        );
+
+        /*
+         * Note: it's possible to customize font style of the Text element you add in three ways:
+         * - inline;
+         * - using named font style (new font style object will be implicitly created);
+         * - using explicitly created font style object.
+         */
+
+        // Adding Text element with font customized inline...
+        $section->addText(
+            '"Great achievement is usually born of great sacrifice, '
+                . 'and is never the result of selfishness." '
+                . '(Napoleon Hill)',
+            array('name' => 'Tahoma', 'size' => 10)
+        );
+
+        // Adding Text element with font customized using named font style...
+        $fontStyleName = 'oneUserDefinedStyle';
+        $phpWord->addFontStyle(
+            $fontStyleName,
+            array('name' => 'Tahoma', 'size' => 10, 'color' => '1B2232', 'bold' => true)
+        );
+        $section->addText(
+            '"The greatest accomplishment is not in never falling, '
+                . 'but in rising again after you fall." '
+                . '(Vince Lombardi)',
+            $fontStyleName
+        );
+
+        // Adding Text element with font customized using explicitly created font style object...
+        $fontStyle = new \PhpOffice\PhpWord\Style\Font();
+        $fontStyle->setBold(true);
+        $fontStyle->setName('Tahoma');
+        $fontStyle->setSize(13);
+        $myTextElement = $section->addText('"Believe you can and you\'re halfway there." (Theodor Roosevelt)');
+        $myTextElement->setFontStyle($fontStyle);
+
+        // Saving the document as OOXML file...
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save('helloWorld.docx');
+
+        // Saving the document as ODF file...
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
+        $objWriter->save('helloWorld.odt');
+
+        // Saving the document as HTML file...
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
+        $objWriter->save('helloWorld.html');
+
+        /* Note: we skip RTF, because it's not XML-based and requires a different example. */
+        /* Note: we skip PDF, because "HTML-to-PDF" approach is used to create PDF documents. */
+
+
+    }
+
+    function generarqr(){
+    
+        $this->getLibrary('phpqrcode/qrlib');
+
+    //Declaramos una carpeta temporal para guardar la imagenes generadas
+    $dir = 'private/temp/';
+    //Si no existe la carpeta la creamos
+    if (!file_exists($dir)){
+        mkdir($dir);
+    }
+    //Declaramos la ruta y nombre del archivo a generar
+    $filename = $dir.'test.png';
+
+    //Parametros de Condiguración
+    $tamaño = 10; //Tamaño de Pixel
+    $level = 'L'; //Precisión Baja
+    $framSize = 3; //Tamaño en blanco
+    $contenido = "https://www.ourlimm.training"; //Texto
+    //Enviamos los parametros a la Función para generar código QR 
+    QRcode::png($contenido, $filename, $level, $tamaño, $framSize); 
+    
+
+    $this->_view->assign('qrimg', $dir.basename($filename) );
+    $this->_view->renderizar("qr");exit;
+
+    }
 
 	function enviarCorreo(){
 		/**
@@ -75,9 +246,6 @@ class usuariosController extends Controller{
 	}
 
 	function procesararchivo(){
-
-
-		header('Content-type: application/json');
 
 		if(!Session::get("autenticacion")){
 			$response['estado'] = false;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-05-03 02:33:39
+/* Smarty version 3.1.33, created on 2019-05-10 01:14:53
   from 'C:\xampp\htdocs\Framework-PHP\views\layout\default\template.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5ccb8c63a42ef9_11189696',
+  'unifunc' => 'content_5cd4b46d38a5b3_69008039',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac5717a215f718d3f944bdc0d82b0d620f5f6316' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Framework-PHP\\views\\layout\\default\\template.tpl',
-      1 => 1556843617,
+      1 => 1557443686,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ccb8c63a42ef9_11189696 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cd4b46d38a5b3_69008039 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="ES">
 <head>
@@ -40,6 +40,13 @@ sb-admin-2.css" rel="stylesheet">
  src="<?php echo $_smarty_tpl->tpl_vars['_layoutParams']->value['ruta_vendor'];?>
 jquery/jquery.min.js"><?php echo '</script'; ?>
 >
+
+      <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="693124699870-sq742idpo8ekbg120msg2cl2dm1t104p.apps.googleusercontent.com">
+    <?php echo '<script'; ?>
+ src="https://apis.google.com/js/platform.js" async defer><?php echo '</script'; ?>
+>
+    
 </head>
 <body id="page-top">
   <?php if (Session::get("autenticacion")) {?>

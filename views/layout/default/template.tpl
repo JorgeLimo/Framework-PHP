@@ -11,6 +11,11 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link href="{$_layoutParams.ruta_css}sb-admin-2.css" rel="stylesheet">
   <script src="{$_layoutParams.ruta_vendor}jquery/jquery.min.js"></script>
+
+      <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="693124699870-sq742idpo8ekbg120msg2cl2dm1t104p.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
 </head>
 <body id="page-top">
   {if Session::get("autenticacion")}
